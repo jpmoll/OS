@@ -26,9 +26,6 @@ int main(void) {
     if ((msqid = msgget(key, msgflg)) < 0)
         die("msgget");
 
-    printf("====================================\n");
-    printf("   LABORATORIO 02 - PROCESO CONSUMIDOR\n");
-    printf("====================================\n");
     printf("Esperando mensajes en la cola IPC (key=%d)...\n\n", key);
 
     while (1) {
@@ -37,24 +34,24 @@ int main(void) {
         if (msgrcv(msqid, &rcvbuffer, MAXSIZE, 0, 0) < 0)
             die("msgrcv");
 
-        printf("[ Mensaje recibido ]\n");
+        printf("Mensaje recibido\n");
         printf("Tipo: %ld\n", rcvbuffer.mtype);
 
         switch (rcvbuffer.mtype) {
             case 1:
-                printf("Procesando mensaje tipo 1: %s\n", rcvbuffer.mtext);
+                printf("mensaje tipo 1: %s\n", rcvbuffer.mtext);
                 break;
             case 2:
-                printf("Procesando mensaje tipo 2: %s\n", rcvbuffer.mtext);
+                printf("mensaje tipo 2: %s\n", rcvbuffer.mtext);
                 break;
             case 3:
-                printf("Procesando mensaje tipo 3: %s\n", rcvbuffer.mtext);
+                printf("mensaje tipo 3: %s\n", rcvbuffer.mtext);
                 break;
             default:
-                printf("Tipo de mensaje desconocido: %s\n", rcvbuffer.mtext);
+                printf("mensaje tipo desconocido: %s\n", rcvbuffer.mtext);
         }
 
-        printf("Esperando 5 segundos...\n\n");
+        printf("Esperando...\n\n");
         sleep(5);
     }
 
