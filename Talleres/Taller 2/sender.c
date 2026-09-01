@@ -66,30 +66,23 @@ int main(void) {
     signal(SIGUSR1, handler_sigusr1);
     signal(SIGUSR2, handler_sigusr2);
 
-    printf("====================================\n");
-    printf("   LABORATORIO 02 - PROCESO EMISOR\n");
-    printf("====================================\n");
     printf("PID del proceso: %d\n\n", getpid());
 
-    /* Tres puntos de recuperación independientes, uno por señal */
     if (sigsetjmp(salto_sigint, 1) != 0) {
-        printf("\n[ SIGINT recibida ]\n");
-        printf(">>> Salto no local #1 -> Recuperación en punto SIGINT\n");
-        enviar_mensaje(msqid, 1, "Senal SIGINT recibida (tipo 1)");
+        printf("\nSIGINT recibida\n");
+        enviar_mensaje(msqid, 1, "Senal tipo 1");
     }
     if (sigsetjmp(salto_sigusr1, 1) != 0) {
-        printf("\n[ SIGUSR1 recibida ]\n");
-        printf(">>> Salto no local #2 -> Recuperación en punto SIGUSR1\n");
-        enviar_mensaje(msqid, 2, "Senal SIGUSR1 recibida (tipo 2)");
+        printf("\nSIGUSR1 recibida\n");
+        enviar_mensaje(msqid, 2, "Senal tipo 2");
     }
     if (sigsetjmp(salto_sigusr2, 1) != 0) {
-        printf("\n[ SIGUSR2 recibida ]\n");
-        printf(">>> Salto no local #3 -> Recuperación en punto SIGUSR2\n");
-        enviar_mensaje(msqid, 3, "Senal SIGUSR2 recibida (tipo 3)");
+        printf("\nSIGUSR2 recibida\n");
+        enviar_mensaje(msqid, 3, "Senal tipo 3");
     }
 
     while (1) {
-        printf("Esperando señales...\n");
+        printf("Esperando se...\n");
         sleep(2);
     }
 
