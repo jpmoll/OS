@@ -1,0 +1,30 @@
+Terminal 1 - escritura
+
+gcc -Wall -o shm shm.c
+./limpiar.sh          # opcional, por si quedó algo de una prueba anterior
+
+./shm c
+
+
+Terminal 2 - lectura
+
+./shm g
+
+
+
+Shell
+Como el programa usa stdin y stdout, la shell se conecta con él:
+
+# Terminal 1: un archivo como entrada (pipe)
+cat in.txt | ./shm c
+
+# Terminal 2: guardar lo recibido en un archivo (redirección)
+./shm g > salida.txt
+
+# O combinar: pasar lo recibido por otro comando
+./shm g | sort
+
+
+
+Para ver el estado real del sistema mientras corre:
+ipcs -m -s        # lista memorias compartidas y semáforos
